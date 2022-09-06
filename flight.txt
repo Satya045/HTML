@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Flight Teceket Booking Form </title>
+    <link rel="stylesheet"href="style.css">
+    <link rel="stylesheet"
+</head>
+
+    <Body background=./images/Rr.jpg>
+
+        
+    <center>
+    <input type="radio" class="btn" name="check"><span>Roundtrip </span>
+    <input type="radio" class="btn" name="check"><span>One Way</span> 
+    <input type="radio" class="btn" name="check"><span>Multy-City</span>
+    </center>
+    
+        <!-- <h1 class="center animate-right">Welcome to my page</h1> -->
+        <h1>Passenger Details</h1> 
+        <form action="">
+            <div class="form-group">
+                <input type="text" name="" placeholder="Enter your Name">
+            </div>
+            <div class="form-group">
+                <input type="text" name="" placeholder="Enter your Age">
+            </div>
+            <div class="form-group">
+                <input type="text" name="" placeholder="Enter your Gender">
+            </div>
+            <div class="form-group">
+                <input type="text" name="" placeholder="Enter your Locality">
+            </div>
+            <div class="form-group">
+                <input type="text" name="" placeholder="Enter your Email Id">
+            </div>
+            <div class="form-group">
+                <input type="text" name="" placeholder="Enter your Phone Number">
+            </div>
+            <input type = "button" value = "Submit" onclick = "fun();" />
+        </form>
+    </div>
+    <style>
+     
+    </style>
+    <script type = "text/javascript">
+        function fun() {
+
+
+           alert ("Submitted Successfully");
+        }
+  </script>     
+
+
+    
+</body>
+</html>
