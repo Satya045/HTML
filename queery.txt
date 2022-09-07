@@ -1,0 +1,85 @@
+Select Datepart(m, GetDate()) -- nesting of functions
+
+Select Datepart(m, GetDate()) -- nesting of functions
+Select DateDiff(d, GetDate(), (GetDate() + 10)), DateDiff(m, GetDate(), (GetDate() + 100)), DateDiff(YY, GetDate(), (GetDate() + 2000))
+
+Select * from Account Where Day(AOD) <= 15 -- Account opened within the first 15 days of the month
+
+Select * from Account Where Month(AOD) >= 4 And Month(AOD) <= 6 -- Account opened in the first quarter of the year
+
+Select * from Account Where Convert(varchar, Opening_Balance) = '1000'
+Select * from Account Where Opening_Balance = '1000'
+Select * from Account Where AOD = '2012-02-29'
+Select * from Account Where AOD = Convert(date, '2012-05-17')
+
+
+Select * from Account Where Opening_Balance = Convert(int, '1000')
+
+Select * from Account Where AStatus = 'Suspended' Or AStatus = 'Terminated'
+
+Select * from Account Where AStatus in ('Suspended', 'Terminated')
+
+Select * from Customer Where NewDate Is Not Null -- Is Null
+
+Select CustID, FName, MName, LtName, FName + ' ' + LTName FullName, FName + ' ' + MName + ' ' + LTName FullMidName from Customer
+Select CustID, FName, MName, LtName, FName + ' ' + Isnull(LTName, '') FullName, FName + ' ' + IsNull(MName, '') + ' ' + IsNull(LTName, '') FullMidName from Customer
+
+Select *, Convert(varchar, Dob, 1) Dates from Customer
+Select Dob, Convert(varchar, Dob, 113) Dates from Customer
+
+[17:48] Suman Aich (Guest)
+Select CustID, Sum(MaxDailyTransAmt), Count(MaxDailyTransAmt), Avg(MaxDailyTransAmt), Min(MaxDailyTransAmt), Max(MaxDailyTransAmt) from Account Group By CustID
+
+Select CustID, Sum(MaxDailyTransAmt), Count(MaxDailyTransAmt), Avg(MaxDailyTransAmt), Min(MaxDailyTransAmt),
+Max(MaxDailyTransAmt) from Account
+Group By CustID
+Having Sum(MaxDailyTransAmt) > 100000 -- Aggregate Row Restriction
+
+
+Select AcNumber, BCity, Account.Bid from Account, Branch Where Account.BID = Branch.BID
+Select AcNumber, BCity, Account.Bid from Account Inner Join Branch On Account.BID = Branch.BID
+
+Select AcNumber, c.CustId, FName from Customer c Inner Join Account a On a.custid = c.CustId
+
+Select AcNumber, c.CustId, FName from Customer c Left Outer Join Account a On a.custid = c.CustId
+Select AcNumber, c.CustId, FName from Customer c Left Outer Join Account a On a.custid = c.CustId Where AcNumber is null
+CREATE TABLE [dbo].[Employee](
+    [EmpID] [int] NOT NULL,
+    [EmpName] [varchar](30) NOT NULL,
+    [Salary] [numeric](18, 2) NULL,
+    [MgrCode] [int] NULL,
+    [Desig] [varchar](20) NULL,
+    [Date_of_Birth] [datetime] NOT NULL,
+    [Date_of_Joining] [datetime] NOT NULL,
+    [EmpAddress] [varchar](100) NOT NULL,
+    [PassportNo] [varchar](100) NULL,
+ CONSTRAINT [PK_Employee_EmpID] PRIMARY KEY CLUSTERED
+(
+    [EmpID] ASC
+)
+) ON [PRIMARY]
+
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (101, N'Prabhat Kumar Shankar', CAST(22000.00 AS Numeric(18, 2)), NULL, N'VP-Marketing', CAST(N'1965-01-01 00:00:00.000' AS DateTime), CAST(N'1980-04-01 00:00:00.000' AS DateTime), N'New Delhi', N'AKIFKDH293939A101')
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (102, N'Sajeev enka', CAST(25000.00 AS Numeric(18, 2)), 101, N'CMD', CAST(N'1965-01-01 00:00:00.000' AS DateTime), CAST(N'1980-04-01 00:00:00.000' AS DateTime), N'New Delhi', N'AKIFKDH293939A10')
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (103, N'Sreeja Kumar1', CAST(22000.00 AS Numeric(18, 2)), 101, N'VP-Technical', CAST(N'1965-01-01 00:00:00.000' AS DateTime), CAST(N'1980-04-01 00:00:00.000' AS DateTime), N'New Delhi', N'AKSSH298389A10')
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (104, N'Deepa Dikshit', CAST(12000.00 AS Numeric(18, 2)), 101, N'VP-HR', CAST(N'1975-01-01 00:00:00.000' AS DateTime), CAST(N'2000-04-01 00:00:00.000' AS DateTime), N'Mumbai', NULL)
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (105, N'Sangeeta', CAST(11000.00 AS Numeric(18, 2)), 103, N'Manager - Technical', CAST(N'1982-03-15 00:00:00.000' AS DateTime), CAST(N'2004-04-20 00:00:00.000' AS DateTime), N'Hyderabad', N'ABCD')
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (106, N'Vijay', CAST(11000.00 AS Numeric(18, 2)), 103, N'Manager - Technical', CAST(N'1982-07-15 00:00:00.000' AS DateTime), CAST(N'2004-05-20 00:00:00.000' AS DateTime), N'Hyderabad', N'JT73663KKS87')
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (107, N'monal', CAST(10000.00 AS Numeric(18, 2)), 105, N'Software Developer', CAST(N'1982-03-16 00:00:00.000' AS DateTime), CAST(N'2004-04-20 00:00:00.000' AS DateTime), N'muradabad', N'THAAKK33923')
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (108, N'jhonny', CAST(11000.00 AS Numeric(18, 2)), 105, N'Software Developer', CAST(N'1982-07-18 00:00:00.000' AS DateTime), CAST(N'2004-05-23 00:00:00.000' AS DateTime), N'abaadpur', N'ADDO2094729')
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (109, N'monup', CAST(11500.00 AS Numeric(18, 2)), 106, N'Software Developer', CAST(N'1982-03-15 00:00:00.000' AS DateTime), CAST(N'2008-04-20 00:00:00.000' AS DateTime), N'gandhinagar', N'ABCD')
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (110, N'jopo', CAST(10500.00 AS Numeric(18, 2)), 106, N'Software Developer', CAST(N'1982-07-10 00:00:00.000' AS DateTime), CAST(N'2009-05-23 00:00:00.000' AS DateTime), N'jodhpur', N'ABCD')
+
+INSERT [dbo].[Employee] ([EmpID], [EmpName], [Salary], [MgrCode], [Desig], [Date_of_Birth], [Date_of_Joining], [EmpAddress], [PassportNo]) VALUES (120, N'Syed Mustafa', CAST(1111.00 AS Numeric(18, 2)), 101, N'dsfsf', CAST(N'1980-01-01 00:00:00.000' AS DateTime), CAST(N'2000-01-01 00:00:00.000' AS DateTime), N'Vizag', N'ffk')
+
+
